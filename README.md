@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+Here's a README for your Expense Tracker v0.1 GitHub repository:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# Expense Tracker v0.1
 
-In the project directory, you can run:
+**Started:** 7/16/24
 
-### `npm start`
+This Expense Tracker application allows users to manage their financial data through adding/removing expenses, categorizing expenses, recording income, and visualizing income vs. expenses through a bar graph. Data is stored locally on the user’s device for easy access.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+- **Add/Remove an Expense**: Input custom expenses, or select from defaults (Gas, Electricity, Water, Mortgage, Food, Car Payment).
+- **Create/Remove Categories**: Add expenses to specific categories (default categories: Travel, Health, Entertainment, Shopping, Food).
+- **Record Income**: Store and display annual income.
+- **Income vs. Expense Display**: Visualize and compare income against expenses in a bar graph.
+- **Local Storage**: Save all data locally for convenient retrieval on the same device.
+- **Expense Date Tracking (Optional)**: Potential to track and display expense dates on a calendar view.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Functionalities & Implementation Details
 
-### `npm run build`
+### Add/Remove An Expense 
+Users can manage individual expenses, which are totaled and visualized.
+- **Backend**: Each expense is stored in a map, with `expense name` as the key and `amount` as a double.
+- **Frontend**: Expenses are listed as `Category ; Name ; Expense`. Users can edit expenses via a subtraction button that removes selected entries.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Create/Remove Categories 
+Organize expenses into categories for better management.
+- **Backend**: Categories are saved as sets of expense names, allowing easy categorization and deletion.
+- **Frontend**: An edit button enables deletion of categories, updating related expenses accordingly. New categories are created as individual sets.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Record Income 
+Input and display user income instantly in the bar graph.
+- **Backend**: Income is stored as a double variable.
+- **Frontend**: A labeled textbox ("Annual Income") allows users to type and immediately update their annual income in the graph.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Displaying Income vs Expenses 
+A bar graph provides a real-time view of income and expenses.
+- **Backend & Frontend**: Graph display is to be implemented, potentially using the KendoReact Charts library.
 
-### `npm run eject`
+### Data Storage
+All input data is stored in the browser’s local storage as strings. This may shift to database storage in future versions to prevent data loss on cache clear.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
