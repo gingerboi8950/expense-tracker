@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // Components
 import ExpenseList from "./expenseList";
+import Expense from "./expense";
 
 function Menu() {
   // Attatched useState to the name, cost, & map because they will be re-rendered when a new expense is submitted.
@@ -17,7 +18,7 @@ function Menu() {
   }
 
   function RemoveExpense() {
-    
+
   }
 
   function AddExpense() {
