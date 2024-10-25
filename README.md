@@ -1,4 +1,4 @@
-Here's a README for your Expense Tracker v0.1 GitHub repository:
+Here's an updated README with a few tweaks to reflect JavaScript usage:
 
 ---
 
@@ -24,17 +24,16 @@ This Expense Tracker application allows users to manage their financial data thr
 
 ### Add/Remove An Expense 
 Users can manage individual expenses, which are totaled and visualized.
-- **Backend**: Each expense is stored in a map, with `expense name` as the key and `amount` as a double.
-- **Frontend**: Expenses are listed as `Category ; Name ; Expense`. Users can edit expenses via a subtraction button that removes selected entries.
+- **Backend**: Each expense is stored in a map, with `expense name` as the key and `amount` as the value.
+- **Frontend**: Expenses are displayed in a list format (`Category ; Name ; Expense`). Users can edit expenses through a subtraction button to remove selected entries.
 
 ### Create/Remove Categories 
 Organize expenses into categories for better management.
-- **Backend**: Categories are saved as sets of expense names, allowing easy categorization and deletion.
+- **Backend**: Categories are saved as sets of expense names for easy categorization and deletion.
 - **Frontend**: An edit button enables deletion of categories, updating related expenses accordingly. New categories are created as individual sets.
 
 ### Record Income 
-Input and display user income instantly in the bar graph.
-- **Backend**: Income is stored as a double variable.
+Users can input and display their income instantly in the bar graph.
 - **Frontend**: A labeled textbox ("Annual Income") allows users to type and immediately update their annual income in the graph.
 
 ### Displaying Income vs Expenses 
@@ -42,5 +41,7 @@ A bar graph provides a real-time view of income and expenses.
 - **Backend & Frontend**: Graph display is to be implemented, potentially using the KendoReact Charts library.
 
 ### Data Storage
-All input data is stored in the browser’s local storage as strings. This may shift to database storage in future versions to prevent data loss on cache clear.
+All input data is saved in the browser’s local storage as strings to maintain data persistence across sessions. In future versions, storage may shift to a database to prevent data loss when the cache is cleared.
+
+--- 
 
