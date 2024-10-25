@@ -18,6 +18,7 @@ function ExpenseList({ expenses }) {
               <div class="row">
                 <div class="col">{name}</div>
                 <div class="col">{cost} </div>
+                
               </div>
             </div>
           </li>

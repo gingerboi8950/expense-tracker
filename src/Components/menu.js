@@ -16,7 +16,11 @@ function Menu() {
     document.getElementById("Cost").value = "";
   }
 
-  function Submit() {
+  function RemoveExpense() {
+    
+  }
+
+  function AddExpense() {
     // <Inputs> do not have Innerhtml values, instead they use value.
     const Newname = document.getElementById("CostName").value;
     const Newcost = document.getElementById("Cost").value;
@@ -59,7 +63,7 @@ function Menu() {
               ></input>
             </div>
           </div>
-          <button onClick={Submit} class="btn btn-primary">
+          <button onClick={AddExpense} class="btn btn-primary">
         Submit
       </button>
         </div>
