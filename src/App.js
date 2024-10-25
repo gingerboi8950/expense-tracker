@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import logo from './logo.svg';
 import './App.css';
 
@@ -18,6 +19,21 @@ function App() {
           Learn React
         </a>
       </header>
+=======
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// Components
+import Title from "./Components/title.js";
+import Menu from "./Components/menu.js";
+
+
+function App() {
+
+  return (
+    <div>
+      <Title />
+      <Menu/>
+>>>>>>> Stashed changes
     </div>
   );
 }
