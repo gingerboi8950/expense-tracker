@@ -1,5 +1,3 @@
-Here's an updated README with a few tweaks to reflect JavaScript usage:
-
 ---
 
 # Expense Tracker v0.1
@@ -10,7 +8,7 @@ This Expense Tracker application allows users to manage their financial data thr
 
 ---
 
-## Features
+## WIP Features
 - **Add/Remove an Expense**: Input custom expenses, or select from defaults (Gas, Electricity, Water, Mortgage, Food, Car Payment).
 - **Create/Remove Categories**: Add expenses to specific categories (default categories: Travel, Health, Entertainment, Shopping, Food).
 - **Record Income**: Store and display annual income.
