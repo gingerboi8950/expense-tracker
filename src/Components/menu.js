@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // Components
 import ExpenseList from "./expenseList";
+import CostCounter from "./costCounter.js";
 
 function Menu() {
   // Attatched useState to the name, cost, & map because they will be re-rendered when a new expense is submitted.
@@ -16,10 +17,6 @@ function Menu() {
     document.getElementById("Cost").value = "";
   }
 
-  function RemoveExpense() {
-
-  }
-
   function AddExpense() {
     // <Inputs> do not have Innerhtml values, instead they use value.
     const Newname = document.getElementById("CostName").value;
@@ -32,6 +29,19 @@ function Menu() {
     // Re-make the Map
     setExpenses((prevExpenses) => new Map(prevExpenses.set(Newname, Newcost)));
     Revert();
+  }
+
+  function DeleteExpense(expenseName) { // Passed to expenseList as onDelete prop
+    // Find the list item expense name 
+    //const expense = e.currentTarget.closest('li').querySelector('.expenseName').textContent;
+    // remove that list item
+    //expenses.delete(expense);
+    // update list
+    setExpenses((prevExpenses) => {
+      const updatedExpenses = new Map(prevExpenses);
+    updatedExpenses.delete(expenseName);
+  return updatedExpenses;
+});
   }
 
   return (
@@ -69,9 +79,9 @@ function Menu() {
         </div>
         <div class="col">
           <div class="card" style={{ width: "25rem" }}>
-            <ExpenseList expenses={expenses} />
+            <ExpenseList expenses={expenses} onDelete={DeleteExpense} />
           </div>
-          <text class="fw-bold">Total Cost: {totalCost}</text>
+          <CostCounter expenses={expenses}/>
         </div>
       </div>
     </>

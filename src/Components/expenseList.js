@@ -1,21 +1,16 @@
-function ExpenseList({ expenses }) {
-  
-  function ShowElement(e) {
-    const button = e.currentTarget.querySelector('.delete-btn');
-    if (button) {
-      button.style.display = "block";
-    }
-  }
-  function HideElement(e) {
-    const button = e.currentTarget.querySelector('.delete-btn');
-    if (button) {
-      button.style.display = "none";
-    }
-  }
+import React, { useState } from "react";
 
-  function DeleteExpense() {
-    // Find the list item in Map, remove that list item
-  }
+function ExpenseList({ expenses, onDelete }) {
+  const [updatedExpenses, setExpenses] = useState(new Map());
+
+  // function DeleteExpense(e) {
+  //   // Find the list item expense name 
+  //   const expense = e.currentTarget.closest('li').querySelector('.expenseName').textContent;
+  //   // remove that list item
+  //   expenses.delete(expense);
+  //   // update list
+  //   setExpenses((prevExpenses) => new Map(prevExpenses));
+  // }
   
   return (
     <ul class="list-group">
@@ -33,10 +28,10 @@ function ExpenseList({ expenses }) {
           <li key={name} class="list-group-item">
             {" "}
             <div class="container text-center">
-              <div class="row" id="expense" onMouseOver={(e) => ShowElement(e)} onMouseOut={(e) => HideElement(e)}>
-                <div class="col">{name}</div>
-                <div class="col">{cost} </div>
-                <button type="button" class="btn-close" aria-label="Close" style={{ display: "none" }} className="btn-close delete-btn" onClick={DeleteExpense}></button>
+              <div class="row" onMouseOver={(e) => ShowElement(e)} onMouseOut={(e) => HideElement(e)}>
+                <div class="col" className="col expenseName">{name}</div>
+                <div class="col">${cost} </div>
+                <button type="button" class="btn-close" aria-label="Close" style={{ display: "none" }} className="btn-close delete-btn" onClick={() => onDelete(name)}></button>
               </div>
             </div>
           </li>
@@ -44,6 +39,19 @@ function ExpenseList({ expenses }) {
       )}
     </ul>
   );
+}
+
+function ShowElement(e) {
+  const button = e.currentTarget.querySelector('.delete-btn');
+  if (button) {
+    button.style.display = "block";
+  }
+}
+function HideElement(e) {
+  const button = e.currentTarget.querySelector('.delete-btn');
+  if (button) {
+    button.style.display = "none";
+  }
 }
 
 export default ExpenseList;
