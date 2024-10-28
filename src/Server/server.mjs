@@ -4,8 +4,6 @@ import { MongoClient } from 'mongodb';
 config(); // Load environment variables
 console.log(process.env.DB_URI);
 
-connectToCluster(process.env.DB_URI); // Failed last time I tried - Mason
-
 export async function connectToCluster(uri) { // Call this when I need to connect to cluster. 
     let mongoClient;
  
@@ -19,6 +17,17 @@ export async function connectToCluster(uri) { // Call this when I need to connec
     } catch (error) {
         console.error('Connection to MongoDB Atlas failed!', error);
         process.exit();
+    }
+ }
+
+ export async function executeStudentCrudOperations() {
+    const uri = process.env.DB_URI;
+    let mongoClient;
+ 
+    try {
+        mongoClient = await connectToCluster(uri);
+    } finally {
+        await mongoClient.close();
     }
  }
 
