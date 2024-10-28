@@ -31,17 +31,18 @@ function Menu() {
     Revert();
   }
 
-  function DeleteExpense(expenseName) { // Passed to expenseList as onDelete prop
-    // Find the list item expense name 
+  function DeleteExpense(expenseName) {
+    // Passed to expenseList as onDelete prop
+    // Find the list item expense name
     //const expense = e.currentTarget.closest('li').querySelector('.expenseName').textContent;
     // remove that list item
     //expenses.delete(expense);
     // update list
     setExpenses((prevExpenses) => {
       const updatedExpenses = new Map(prevExpenses);
-    updatedExpenses.delete(expenseName);
-  return updatedExpenses;
-});
+      updatedExpenses.delete(expenseName);
+      return updatedExpenses;
+    });
   }
 
   return (
@@ -74,14 +75,14 @@ function Menu() {
             </div>
           </div>
           <button onClick={AddExpense} class="btn btn-primary">
-        Submit
-      </button>
+            Submit
+          </button>
         </div>
         <div class="col">
           <div class="card" style={{ width: "25rem" }}>
             <ExpenseList expenses={expenses} onDelete={DeleteExpense} />
           </div>
-          <CostCounter expenses={expenses}/>
+          <CostCounter expenses={expenses} />
         </div>
       </div>
     </>
