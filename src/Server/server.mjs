@@ -4,7 +4,7 @@ import { MongoClient } from 'mongodb';
 config(); // Load environment variables
 console.log(process.env.DB_URI);
 
-export async function connectToCluster(uri) { // Call this when I need to connect to cluster. 
+export async function connectToCluster(uri) { 
     let mongoClient;
  
     try {
@@ -20,12 +20,14 @@ export async function connectToCluster(uri) { // Call this when I need to connec
     }
  }
 
- export async function executeStudentCrudOperations() {
+ export async function executeOperations() { // Call this when I need to connect to cluster. 
     const uri = process.env.DB_URI;
     let mongoClient;
  
     try {
         mongoClient = await connectToCluster(uri);
+        const db = mongoClient.db('Expenses');
+        const collection = db.collection('Users');
     } finally {
         await mongoClient.close();
     }
