@@ -1,0 +1,13 @@
+.logo {
+    width: 150px;
+    height: 150px;
+    margin-right: 1rem;
+    border-radius: 25px;
+}
+
+.container {
+    border-radius: 25px;
+    background-color: rgb(53,53,53);
+    color: white;
+}
+
