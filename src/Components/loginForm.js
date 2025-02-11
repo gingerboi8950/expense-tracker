@@ -51,47 +51,52 @@ function LoginForm() {
       );
     }
   };
-  const handleLogout = async () => {
-    localStorage.removeItem("token"); 
-    window.location.href = "/";
-  };
 
   return (
     <>
-      <img src="./logo.png" class="logo" />
+    <h1>Expense Tracker</h1>
+      <div class="container loginContainer">
+        <img src="./logo.png" class="logo" />
 
-      <h3>Sign in</h3>
-      <input
-        type="text"
-        id="username"
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        onKeyDown={(event) => {
-          if (event.key === "Enter") {
-            handleLogin();
-          }
-        }}
-      />
-      <br />
-      <button id="loginBtn" onClick={handleLogin}>
-        Login
-      </button>
-      <button id="signUpnBtn" onClick={handleSignUp}>
-        Sign Up
-      </button>
+        <h3>Sign in</h3>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            id="username"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <br />
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleLogin();
+              }
+            }}
+          />
+        </div>
+        <br />
+        <button id="loginBtn" class="btn btn-secondary" onClick={handleLogin}>
+          Login
+        </button>
+        <button
+          id="signUpnBtn"
+          class="btn btn-secondary"
+          onClick={handleSignUp}
+        >
+          Sign Up
+        </button>
+      </div>
 
       <br />
-
-      <button id="logoutBtn" onClick={handleLogout}>
-        Logout
-      </button>
     </>
   );
 }

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "../CSS/style.css";
 
 function Expenses() {
   const [expenses, setExpenses] = useState([]); // State to store expenses
   const [expenseName, setExpenseName] = useState("");
   const [expenseCost, setExpenseCost] = useState("");
+  const [totalExpense, settotalExpense] = useState(0);
   const [showButton, setShowButton] = useState(null);
+
+  const handleLogout = async () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
 
   function Revert() {
     document.getElementById("expenseName").value = "";
@@ -35,7 +42,9 @@ function Expenses() {
 
   useEffect(() => {
     fetchExpenses();
-  }, []);
+    const total = expenses.reduce((sum, expense) => sum + expense.cost, 0);
+    settotalExpense(total);
+  }, [expenses]);
 
   const addExpense = async () => {
     const token = localStorage.getItem("token"); // Retrieve stored JWT token
@@ -94,7 +103,29 @@ function Expenses() {
 
   return (
     <>
-      <div class="container">
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand">
+            <img
+              src="./logo.png"
+              alt="logo"
+              width="30"
+              height="24"
+              class="d-inline-block align-text-top"
+            />
+            Expense Tracker
+          </a>
+          <button
+            id="logoutBtn"
+            onClick={handleLogout}
+            class="btn btn-secondary"
+          >
+            Logout
+          </button>
+        </div>
+      </nav>
+      <br />
+      <div class="container bg-dark">
         <h1>Expenses</h1>
         <div class="input-group mb-3">
           <input
@@ -117,7 +148,7 @@ function Expenses() {
             onChange={(e) => setExpenseCost(e.target.value)}
           ></input>
         </div>
-
+        <p>Total Cost: ${totalExpense}</p>
         <button
           class="btn btn-secondary"
           onClick={() => {
@@ -127,27 +158,36 @@ function Expenses() {
         >
           Submit
         </button>
-        <ul>
+        <div class="container">
+          <div class="row">
           {expenses.map((expenses) => (
-            <li
+            <div
+              class="col-md-4 mb-3"
               key={expenses._id}
               onMouseOver={() => setShowButton(expenses._id)}
               onMouseOut={() => {
                 setShowButton(null);
               }}
             >
-              {expenses.name}: ${expenses.cost}
-              {showButton === expenses._id && (
-                <button
-                  class="btn btn-danger"
-                  onClick={() => deleteExpense(expenses._id)}
-                >
-                  Delete
-                </button>
-              )}
-            </li>
+              <div className="card shadow">
+              <div class="card-body">
+                <h5 class="card-title">{expenses.name}</h5>
+                <p class="card-text">${expenses.cost}</p>
+
+                {showButton === expenses._id && (
+                  <button
+                    class="btn btn-danger"
+                    onClick={() => deleteExpense(expenses._id)}
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
+              </div>
+            </div>
           ))}
-        </ul>
+          </div>
+        </div>
       </div>
     </>
   );
