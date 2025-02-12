@@ -58,6 +58,9 @@ function Expenses() {
       alert("Invalid expense.");
       return;
     }
+    
+    setExpenseName(expenseName.toLowerCase());
+    setExpenseName(expenseName.charAt(0).toUpperCase() + expenseName.slice(1));
 
     try {
       const response = await axios.post(
@@ -103,54 +106,59 @@ function Expenses() {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand">
+      <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div className="container-fluid">
+          <a className="navbar-brand">
             <img
               src="./logo.png"
               alt="logo"
               width="30"
               height="24"
-              class="d-inline-block align-text-top"
+              className="d-inline-block align-text-top"
             />
             Expense Tracker
           </a>
           <button
             id="logoutBtn"
             onClick={handleLogout}
-            class="btn btn-secondary"
+            className="btn btn-secondary"
           >
             Logout
           </button>
         </div>
       </nav>
       <br />
-      <div class="container bg-dark">
+      <div className="container bg-dark">
         <h1>Expenses</h1>
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
           <input
             id="expenseName"
-            class="form-control"
+            className="form-control"
             type="text"
             placeholder="Expense Name"
             onChange={(e) => setExpenseName(e.target.value)}
           ></input>
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="basic-addon1">
             $
           </span>
           <input
             id="expenseCost"
-            class="form-control"
+            className="form-control"
             type="text"
             placeholder="Cost"
             onChange={(e) => setExpenseCost(e.target.value)}
+            onKeyDown={(e) => {
+              if(e.key === 'Enter') {
+                addExpense();
+              }
+            }}
           ></input>
         </div>
         <p>Total Cost: ${totalExpense}</p>
         <button
-          class="btn btn-secondary"
+          className="btn btn-secondary"
           onClick={() => {
             addExpense();
             fetchExpenses();
@@ -158,34 +166,34 @@ function Expenses() {
         >
           Submit
         </button>
-        <div class="container">
-          <div class="row">
-          {expenses.map((expenses) => (
-            <div
-              class="col-md-4 mb-3"
-              key={expenses._id}
-              onMouseOver={() => setShowButton(expenses._id)}
-              onMouseOut={() => {
-                setShowButton(null);
-              }}
-            >
-              <div className="card shadow">
-              <div class="card-body">
-                <h5 class="card-title">{expenses.name}</h5>
-                <p class="card-text">${expenses.cost}</p>
+        <div className="container">
+          <div className="row">
+            {expenses.map((expenses) => (
+              <div
+                className="col-md-4 mb-3"
+                key={expenses._id}
+                onMouseOver={() => setShowButton(expenses._id)}
+                onMouseOut={() => {
+                  setShowButton(null);
+                }}
+              >
+                <div className="card shadow">
+                  <div className="card-body d-flex justify-content-between align-items-center">
+                    <h5 className="card-title">{expenses.name}</h5>
+                    <p className="card-text">${expenses.cost}</p>
 
-                {showButton === expenses._id && (
-                  <button
-                    class="btn btn-danger"
-                    onClick={() => deleteExpense(expenses._id)}
-                  >
-                    Delete
-                  </button>
-                )}
+                    {showButton === expenses._id && (
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteExpense(expenses._id)}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
-              </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
       </div>

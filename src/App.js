@@ -8,26 +8,24 @@ import {
 
 // Components
 import LoginForm from "./Components/loginForm.js";
+import SignUpForm from "./Components/signUpForm.js";
 import Expenses from "./Components/expenses.js";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem("token");
   return (
-    <div>
-      
-
-      <br />
-
+    <>
       <Router>
         <Routes>
           <Route path="/" element={<LoginForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
           <Route
             path="/expenses"
             element={isAuthenticated ? <Expenses /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>
-    </div>
+    </>
   );
 }
 

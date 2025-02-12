@@ -1,7 +1,6 @@
 import express from "express";
 import Expense from "../Models/expenseModel.js";
 import authMiddleware from "../Middleware/auth.js";
-import axios from "axios";
 
 const router = express.Router();
 
@@ -19,14 +18,12 @@ router.post("/", authMiddleware, async (req, res) => {
   try {
     const { name, cost } = req.body;
     const userId = req.user.id;
-
-    const existingExpense = await Expense.findOneAndUpdate(
-      { userId, name },
-      { cost },
-      { new: true, upsert: true }
+    
+    const newExpense = await Expense.create(
+      { userId, name, cost }
     );
 
-    res.json(existingExpense);
+    res.json(newExpense);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

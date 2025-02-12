@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import "../CSS/style.css";
 
-function LoginForm() {
+function SignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,26 +12,36 @@ function LoginForm() {
     setUsername("");
   }
 
-  const handleLogin = async () => {
+  const alertPlaceholder = document.getElementById("alertPlaceholder");
+  const appendAlert = (message) => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = [
+      `<div class="alert alert-danger alert-dismissible" role="alert">`,
+      `<div>${message}</div>`,
+      `<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`,
+      `</div>`,
+    ].join("");
+
+    alertPlaceholder.append(wrapper);
+  };
+  const handleSignUp = async () => {
+    if (!username || !password) {
+        
+        appendAlert("Invalid username or password");
+        
+      return;
+    }
     try {
       const response = await axios.post(
-        // sending username & password
-        "http://localhost:3500/api/users/login",
-        {
-          username,
-          password,
-        }
+        "http://localhost:3500/api/users/register",
+        { username, password }
       );
-      // Store JWT token
-      localStorage.setItem("token", response.data.token);
-      alert("Login successful.");
-      console.log("Login successful", response.data);
+      console.log("Sign-Up successful");
       Revert();
-      window.location.href = "/expenses";
+      window.location.href = "/";
     } catch (error) {
-      alert("Login failed.");
       console.log(
-        "Login failed:",
+        "Sign-Up failed:",
         error.response?.data?.message || error.message
       );
     }
@@ -54,10 +63,12 @@ function LoginForm() {
           </a>
         </div>
       </nav>
+
+      <div id="alertPlaceholder"></div>
+
       <div className="container loginContainer">
         <img src="./logo.png" className="logo" alt="logo" />
-
-        <h3>Sign in</h3>
+        <h3>Sign up</h3>
         <div className="input-group mb-3">
           <input
             className="form-control"
@@ -75,27 +86,17 @@ function LoginForm() {
             id="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleLogin();
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleSignUp();
               }
             }}
           />
         </div>
-        <br />
         <button
-          id="loginBtn"
+          id="signUpBtn"
           className="btn btn-secondary"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-        <button
-          id="signUpnBtn"
-          className="btn btn-secondary"
-          onClick={() => {
-            window.location.href = "/signup";
-          }}
+          onClick={handleSignUp}
         >
           Sign Up
         </button>
@@ -104,4 +105,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default SignUpForm;
