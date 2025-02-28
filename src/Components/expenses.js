@@ -109,63 +109,73 @@ function Expenses() {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
           <a className="navbar-brand">
-            <img
+            {/* <img
               src="./logo.png"
               alt="logo"
               width="30"
               height="24"
               className="d-inline-block align-text-top"
-            />
-            Expense Tracker
+            /> */}
+          Expense Tracker
           </a>
           <button
             id="logoutBtn"
             onClick={handleLogout}
             className="btn btn-secondary"
           >
-            Logout
+          Logout
           </button>
         </div>
       </nav>
-      <br />
-      <div className="container bg-dark">
-        <h1>Expenses</h1>
-        <div className="input-group mb-3">
-          <input
-            id="expenseName"
-            className="form-control"
-            type="text"
-            placeholder="Expense Name"
-            onChange={(e) => setExpenseName(e.target.value)}
-          ></input>
+
+      <br/>
+
+      <div className="container bg-dark w-1/3">
+        <div class="flex justify-left py-2">
+          <span class="text-3xl text-white font-semibold">Expenses</span>
         </div>
-        <div className="input-group mb-3">
-          <span className="input-group-text" id="basic-addon1">
-            $
-          </span>
-          <input
-            id="expenseCost"
-            className="form-control"
-            type="text"
-            placeholder="Cost"
-            onChange={(e) => setExpenseCost(e.target.value)}
-            onKeyDown={(e) => {
-              if(e.key === 'Enter') {
-                addExpense();
-              }
+
+        <div classname="userInput flex flex-col intems-center">
+          <div className="input-group mb-3">
+            <input
+              id="expenseName"
+              className="form-control"
+              type="text"
+              placeholder="Expense Name"
+              onChange={(e) => setExpenseName(e.target.value)}
+            ></input>
+          </div>
+          <div className="input-group mb-2">
+            <span className="input-group-text" id="basic-addon1">$</span>
+            <input
+              id="expenseCost"
+              className="form-control"
+              type="text"
+              placeholder="Cost"
+              onChange={(e) => setExpenseCost(e.target.value)}
+              onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                  addExpense();
+                }
+              }}
+            ></input>
+          </div>
+        </div>
+        
+        <div class="flex justify-center mb-2">
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              addExpense();
+              fetchExpenses();
             }}
-          ></input>
-        </div>
-        <p>Total Cost: ${totalExpense}</p>
-        <button
-          className="btn btn-secondary"
-          onClick={() => {
-            addExpense();
-            fetchExpenses();
-          }}
-        >
+          >
           Submit
-        </button>
+          </button>
+
+          <span class="text-2xl text-white pt-2">Total Cost: ${totalExpense}</span>
+        </div>
+
         <div className="container">
           <div className="row">
             {expenses.map((expenses) => (
@@ -177,18 +187,19 @@ function Expenses() {
                   setShowButton(null);
                 }}
               >
-                <div className="card shadow">
-                  <div className="card-body d-flex justify-content-between align-items-center">
-                    <h5 className="card-title">{expenses.name}</h5>
-                    <p className="card-text">${expenses.cost}</p>
+                
+                <div class="card sm:max-w-sm">
+                  <div class="card-header">
+                    <h5 class="card-title font-bold">{expenses.name}</h5>
+                  </div>
 
+                  <div class="card-body">
+                    <p>{expenses.cost}</p>
+                  </div>
+
+                  <div class="card-footer">
                     {showButton === expenses._id && (
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => deleteExpense(expenses._id)}
-                      >
-                        Delete
-                      </button>
+                      <button className="btn btn-danger" onClick={() => deleteExpense(expenses._id)}>Delete</button>
                     )}
                   </div>
                 </div>

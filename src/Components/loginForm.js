@@ -43,62 +43,76 @@ function LoginForm() {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
           <a className="navbar-brand">
-            <img
+            {/* <img
               src="./logo.png"
               alt="logo"
-              width="30"
-              height="24"
+              width="60"
+              height="48"
               className="d-inline-block align-text-top"
-            />
+            /> */}
             Expense Tracker
           </a>
         </div>
       </nav>
-      <div className="container loginContainer">
-        <img src="./logo.png" className="logo" alt="logo" />
 
-        <h3>Sign in</h3>
-        <div className="input-group mb-3">
-          <input
-            className="form-control"
-            type="text"
-            id="username"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className="input-group mb-3">
-          <input
-            className="form-control"
-            type="password"
-            id="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleLogin();
-              }
-            }}
-          />
-        </div>
-        <br />
-        <button
-          id="loginBtn"
-          className="btn btn-secondary"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-        <button
-          id="signUpnBtn"
-          className="btn btn-secondary"
-          onClick={() => {
-            window.location.href = "/signup";
-          }}
-        >
-          Sign Up
-        </button>
+      <div className="container loginContainer">
+          <div class="row justify-center">
+            <img src="./logo.png" className="logo" alt="logo"/>
+          </div>
+
+          <div class="flex justify-center">
+            <span class="text-4xl text-white font-bold">Sign In</span>
+          </div>
+          
+          <br/>
+
+          <div className="flex justify-center items-center">
+            <div classname="userInput flex flex-col intems-center">
+              <div className="input-group mb-6 w-80">
+                <input
+                  className="form-control w-full px-4 py-2 border border-gray-300 rounded-lg"
+                  type="text"
+                  id="username"
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+
+              <div className="input-group mb-6 w-80">
+                <input
+                  className="form-control w-full px-4 py-2 border border-gray-300 rounded-lg"
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleLogin();
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-center">
+            <button
+              id="loginBtn"
+              className="btn btn-secondary"
+              onClick={handleLogin}
+            >
+            Login
+            </button>
+            <button
+              id="signUpnBtn"
+              className="btn btn-secondary"
+              onClick={() => {
+                window.location.href = "/signup";
+              }}
+            >
+            Sign Up
+            </button>
+          </div>
       </div>
     </>
   );
