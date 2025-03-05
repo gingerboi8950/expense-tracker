@@ -9,7 +9,7 @@ import {
 // Components
 import LoginForm from "./Components/loginForm.js";
 import SignUpForm from "./Components/signUpForm.js";
-import Expenses from "./Components/expenses.js";
+import ExpenseMenu from "./Components/expenseMenu.js";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -21,7 +21,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route
             path="/expenses"
-            element={isAuthenticated ? <Expenses /> : <Navigate to="/" />}
+            element={isAuthenticated ? <ExpenseMenu /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>
