@@ -3,19 +3,21 @@ import { useState } from "react";
 function ExpenseInput({ addExpense }) {
   const [expenseName, setExpenseName] = useState("");
   const [expenseCost, setExpenseCost] = useState("");
-
+  const [expenseDate, setExpenseDate] = useState("");
   function handleSubmit() {
-    setExpenseName(expenseName.toLowerCase());
-    setExpenseName(expenseName.charAt(0).toUpperCase() + expenseName.slice(1));
-    addExpense(expenseName, expenseCost);
+    addExpense(expenseName, expenseCost, expenseDate);
     document.getElementById("expenseName").value = "";
     document.getElementById("expenseCost").value = "";
+    document.getElementById("expenseDate").value = "";
   }
 
   return (
     <>
       <div classname="userInput flex flex-col intems-center">
         <div className="input-group mb-3">
+          <span className="input-group-text" id="spanDate">
+            Name
+          </span>
           <input
             id="expenseName"
             className="form-control"
@@ -25,7 +27,7 @@ function ExpenseInput({ addExpense }) {
           ></input>
         </div>
         <div className="input-group mb-2">
-          <span className="input-group-text" id="basic-addon1">
+          <span className="input-group-text" id="spanMoney">
             $
           </span>
           <input
@@ -39,6 +41,18 @@ function ExpenseInput({ addExpense }) {
                 handleSubmit();
               }
             }}
+          ></input>
+        </div>
+
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="spanDate">
+            Date
+          </span>
+          <input
+            id="expenseDate"
+            className="form-control"
+            type="date"
+            onChange={(e) => setExpenseDate(e.target.value)}
           ></input>
         </div>
       </div>

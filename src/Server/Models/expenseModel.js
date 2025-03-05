@@ -6,6 +6,7 @@ const expenseSchema = new Schema(
     userId: String, // foreign key that links to users
     name: String,
     cost: Number,
+    date: Date,
   },
   { collection: "expenses" }
 );

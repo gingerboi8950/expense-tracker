@@ -8,7 +8,13 @@ router.get("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
     const expenses = await Expense.find({ userId });
-    res.json(expenses);
+
+    const formattedExpenses = expenses.map((expenses) => ({
+      ...expenses.toObject(),
+      date: new Date(expenses.date).toLocaleDateString("en-US"),
+    }));
+
+    res.json(formattedExpenses);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -16,12 +22,10 @@ router.get("/", authMiddleware, async (req, res) => {
 
 router.post("/", authMiddleware, async (req, res) => {
   try {
-    const { name, cost } = req.body;
+    const { name, cost, date } = req.body;
     const userId = req.user.id;
-    
-    const newExpense = await Expense.create(
-      { userId, name, cost }
-    );
+
+    const newExpense = await Expense.create({ userId, name, cost, date });
 
     res.json(newExpense);
   } catch (error) {

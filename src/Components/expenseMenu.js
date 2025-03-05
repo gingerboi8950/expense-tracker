@@ -14,27 +14,28 @@ function ExpenseMenu() {
     window.location.href = "/";
   };
 
-  const fetchExpenses = async () => {
-    if (!token) {
-      console.error("No token found, user not authenticated.");
-      return;
-    }
-    try {
-      const response = await axios.get("http://localhost:3500/api/expense", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setExpenses(response.data);
-    } catch (error) {
-      console.error(
-        "Failed to fetch expenses:",
-        error.response?.data?.message || error.message
-      );
-    }
-  };
-
   useEffect(() => {
+    const fetchExpenses = async () => {
+      if (!token) {
+        console.error("No token found, user not authenticated.");
+        return;
+      }
+      try {
+        const response = await axios.get("http://localhost:3500/api/expense", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setExpenses(response.data);
+      } catch (error) {
+        console.error(
+          "Failed to fetch expenses:",
+          error.response?.data?.message || error.message
+        );
+      }
+    };
+
     fetchExpenses();
+
     const total = expenses.reduce((sum, expense) => sum + expense.cost, 0);
     settotalExpense(total);
   }, [expenses]);
@@ -60,7 +61,7 @@ function ExpenseMenu() {
     }
   };
 
-  const addExpense = async (expenseName, expenseCost) => {
+  const addExpense = async (expenseName, expenseCost, expenseDate) => {
     if (!token) {
       console.error("No token found, user not authenticated.");
       return;
@@ -72,12 +73,20 @@ function ExpenseMenu() {
     } else if (expenseCost <= 0) {
       alert("Expense must be greater than zero.");
       return;
+    } else if (!expenseDate) {
+      alert("Invalid date");
     }
 
+    // Modify Name
+    expenseName = expenseName.toLowerCase();
+    expenseName = expenseName.charAt(0).toUpperCase() + expenseName.slice(1);
+    
+    
+    
     try {
       const response = await axios.post(
         "http://localhost:3500/api/expense",
-        { name: expenseName, cost: expenseCost },
+        { name: expenseName, cost: expenseCost, date: expenseDate },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log("Expense posted.", response.data);
@@ -121,7 +130,9 @@ function ExpenseMenu() {
         </div>
         <ExpenseInput addExpense={addExpense} />
         <div class="flex justify-center mb-2">
-          <span class="text-2xl text-white pt-2">Total Cost: ${totalExpense}</span>
+          <span class="text-2xl text-white pt-2">
+            Total Cost: ${totalExpense}
+          </span>
         </div>
       </div>
       <ExpenseList expenses={expenses} deleteExpense={deleteExpense} />
